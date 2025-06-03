@@ -1,0 +1,16 @@
+version: "3.1"
+
+rules:
+- rule: Activate flight form
+  steps:
+    - intent: search_flight
+    - action: flight_form
+    - active_loop: flight_form
+
+- rule: Submit flight form
+  condition:
+    - active_loop: flight_form
+  steps:
+    - action: flight_form
+    - active_loop: null
+    - action: action_search_flight

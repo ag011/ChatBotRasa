@@ -1,0 +1,70 @@
+version: "3.1"
+
+intents:
+  - search_flight
+  - search_hotel
+  - suggest_package
+  - talk_to_agent
+  - general_travel_interest
+  - inform
+
+entities:
+  - source
+  - destination
+  - travel_date
+
+slots:
+  source:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: source
+      - type: from_text
+
+  destination:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: destination
+      - type: from_text
+
+  travel_date:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: travel_date
+      - type: from_text
+
+responses:
+  utter_ask_source:
+    - text: "Please provide the departure city."
+
+  utter_ask_destination:
+    - text: "Please provide the destination city."
+
+  utter_ask_travel_date:
+    - text: "On what date would you like to travel?"
+
+  utter_talk_to_agent:
+    - text: "Okay, connecting you to a human agent now."
+
+  utter_ask_travel_type:
+    - text: "Sure! Are you looking for flights, hotels, or a complete travel package?"
+
+  utter_default:
+    - text: "Sorry, I didn’t quite understand that. Are you looking for flights, hotels, or packages?"
+
+actions:
+  - action_search_flight
+  - action_search_hotel
+  - action_suggest_package
+
+forms:
+  flight_form:
+    required_slots:
+      - source
+      - destination
+      - travel_date

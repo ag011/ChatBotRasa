@@ -1,0 +1,108 @@
+version: "3.1"
+
+nlu:
+
+# --- FLIGHT SEARCH ---
+- intent: search_flight
+  examples: |
+    - I want to book a flight
+    - Book me a flight from [Delhi](source) to [Dubai](destination)
+    - Find flights from [Mumbai](source) to [Singapore](destination)
+    - Show me flights to [Paris](destination)
+    - Any flights on [10th July](travel_date)?
+    - Are there flights from [Chennai](source) to [Kolkata](destination) on [15th August](travel_date)?
+    - I want to fly to [Bangalore](destination) on [June 5th](travel_date)
+    - Need a flight from [Hyderabad](source) to [London](destination)
+    - Flying from [Pune](source) to [New York](destination) on [1st September](travel_date)
+
+# --- SLOT FILLING DURING FORM ---
+- intent: inform
+  examples: |
+    - [Delhi](source)
+    - [Mumbai](source)
+    - [Dubai](destination)
+    - [Singapore](destination)
+    - [10th July](travel_date)
+    - [15th August](travel_date)
+    - [June 5th](travel_date)
+    - I want to go to [Dubai](destination)
+    - Leaving from [Delhi](source)
+    - Traveling on [10th July](travel_date)
+    - I'm going to [Paris](destination)
+    - From [Chennai](source)
+    - To [Bangalore](destination)
+    - [5th June](travel_date)
+    - My travel date is [20th September](travel_date)
+    - Source is [Kolkata](source)
+    - Destination is [Goa](destination)
+
+# --- GENERAL INTEREST IN TRAVEL ---
+- intent: general_travel_interest
+  examples: |
+    - I want to travel
+    - I'm planning a trip
+    - Need help with travel
+    - Help me book something
+    - I want to go somewhere
+    - Can you help with travel plans?
+
+# --- HOTEL SEARCH ---
+- intent: search_hotel
+  examples: |
+    - I want to book a hotel
+    - Find me hotels in Goa
+    - Show hotel options in Paris
+    - I need a hotel in Dubai
+
+# --- PACKAGE SUGGESTION ---
+- intent: suggest_package
+  examples: |
+    - Suggest some travel packages
+    - Any honeymoon packages?
+    - Show me popular travel destinations
+    - Best packages for family trip?
+
+# --- TALK TO HUMAN AGENT ---
+- intent: talk_to_agent
+  examples: |
+    - I want to talk to a human
+    - Can I speak with an agent?
+    - Need help from customer support
+    - Connect me to someone
+
+# --- LOOKUP TABLES TO AID ENTITY EXTRACTION ---
+- lookup: source
+  examples: |
+    - Delhi
+    - Mumbai
+    - Chennai
+    - Kolkata
+    - Hyderabad
+    - Pune
+    - Bangalore
+
+- lookup: destination
+  examples: |
+    - Dubai
+    - Singapore
+    - Paris
+    - London
+    - New York
+    - Goa
+
+- lookup: travel_date
+  examples: |
+    - 10th July
+    - 15th August
+    - June 5th
+    - 1st September
+    - 5th June
+    - 20th September
+
+# --- SYNONYMS ---
+- synonym: Mumbai
+  examples: |
+    - Bombay
+
+- synonym: Bangalore
+  examples:

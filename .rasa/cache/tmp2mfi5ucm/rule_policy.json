@@ -1,0 +1,24 @@
+{
+  "lookup": {
+    "rules": {
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"flight_form\"}}]": "action_search_flight",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"flight_form\"}}, {\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"action_search_flight\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"search_flight\"}}]": "flight_form",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"search_flight\"}}, {\"active_loop\": {\"name\": \"flight_form\"}, \"prev_action\": {\"action_name\": \"flight_form\"}, \"user\": {\"intent\": \"search_flight\"}}]": "action_listen"
+    },
+    "rule_only_slots": [],
+    "rule_only_loops": [
+      "flight_form"
+    ],
+    "rules_for_loop_unhappy_path": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"flight_form\"}, \"prev_action\": {\"action_name\": \"flight_form\"}, \"user\": {\"intent\": \"search_flight\"}}]": "do_not_predict_loop_action"
+    },
+    "rules_not_in_stories": [
+      "handling active loops and forms - flight_form",
+      "predicting default action with intent back",
+      "predicting default action with intent restart",
+      "predicting default action with intent session_start",
+      "handling active loops and forms - flight_form - action_listen"
+    ]
+  }
+}
