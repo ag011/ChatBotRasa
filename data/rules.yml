@@ -14,3 +14,8 @@ rules:
     - action: flight_form
     - active_loop: null
     - action: action_search_flight
+
+- rule: Say greet message on greeting
+  steps:
+    - intent: greet
+    - action: utter_greet

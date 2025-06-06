@@ -99,6 +99,19 @@ nlu:
     - 5th June
     - 20th September
 
+# --- GREET ---
+- intent: greet
+  examples: |
+    - hello
+    - hi
+    - hey
+    - good morning
+    - good evening
+    - what's up
+    - howdy
+    - hey there
+
+
 # --- SYNONYMS ---
 - synonym: Mumbai
   examples: |

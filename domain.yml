@@ -1,6 +1,7 @@
 version: "3.1"
 
 intents:
+  - greet
   - search_flight
   - search_hotel
   - suggest_package
@@ -20,7 +21,6 @@ slots:
     mappings:
       - type: from_entity
         entity: source
-      - type: from_text
 
   destination:
     type: text
@@ -28,15 +28,13 @@ slots:
     mappings:
       - type: from_entity
         entity: destination
-      - type: from_text
 
   travel_date:
     type: text
     influence_conversation: true
     mappings:
       - type: from_entity
-        entity: travel_date
-      - type: from_text
+        entity: travel_date 
 
 responses:
   utter_ask_source:
@@ -56,11 +54,14 @@ responses:
 
   utter_default:
     - text: "Sorry, I didn’t quite understand that. Are you looking for flights, hotels, or packages?"
+  
+  utter_greet:
+    - text: "Hi there! 👋 I’m your travel assistant. How can I help you today?"
+    - text: "Hello! Ready to plan your next adventure?"
 
 actions:
   - action_search_flight
-  - action_search_hotel
-  - action_suggest_package
+  - validate_flight_form
 
 forms:
   flight_form:
@@ -68,3 +69,5 @@ forms:
       - source
       - destination
       - travel_date
+
+

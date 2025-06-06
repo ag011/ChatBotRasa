@@ -15,6 +15,11 @@ stories:
     - active_loop: null
     - action: action_search_flight
 
+- story: greet and proceed
+  steps:
+    - intent: greet
+    - action: utter_greet
+
 - story: Book flight with all details at once
   steps:
     - intent: search_flight
