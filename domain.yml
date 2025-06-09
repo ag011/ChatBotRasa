@@ -58,6 +58,9 @@ responses:
   utter_greet:
     - text: "Hi there! 👋 I’m your travel assistant. How can I help you today?"
     - text: "Hello! Ready to plan your next adventure?"
+    
+  utter_thank_you:
+    - text: "You're welcome! Let me know if you need anything else ✈️🏨"
 
 actions:
   - action_search_flight

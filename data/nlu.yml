@@ -111,6 +111,22 @@ nlu:
     - howdy
     - hey there
 
+- intent: thank_you
+  examples: |
+    - thank you
+    - thanks
+    - thank you so much
+    - appreciate it
+    - thanks a lot
+    - thx
+
+- intent: restart_conversation
+  examples: |
+    - I want to start again
+    - Let's start over
+    - Begin from start
+    - Restart
+    - Start new search
 
 # --- SYNONYMS ---
 - synonym: Mumbai
