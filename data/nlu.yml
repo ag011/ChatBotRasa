@@ -127,6 +127,9 @@ nlu:
     - Begin from start
     - Restart
     - Start new search
+    - start again
+    - begin again
+    - reset
 
 # --- SYNONYMS ---
 - synonym: Mumbai

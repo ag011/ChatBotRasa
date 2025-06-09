@@ -8,6 +8,8 @@ intents:
   - talk_to_agent
   - general_travel_interest
   - inform
+  - thank_you
+  - restart_conversation
 
 entities:
   - source
@@ -65,6 +67,7 @@ responses:
 actions:
   - action_search_flight
   - validate_flight_form
+
 
 forms:
   flight_form:

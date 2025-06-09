@@ -1,0 +1,12 @@
+{
+  "0": "correct_slot",
+  "1": "general_travel_interest",
+  "2": "greet",
+  "3": "inform",
+  "4": "restart_conversation",
+  "5": "search_flight",
+  "6": "search_hotel",
+  "7": "suggest_package",
+  "8": "talk_to_agent",
+  "9": "thank_you"
+}

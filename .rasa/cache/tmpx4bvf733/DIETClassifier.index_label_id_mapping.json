@@ -1,0 +1,11 @@
+{
+  "0": "general_travel_interest",
+  "1": "greet",
+  "2": "inform",
+  "3": "restart_conversation",
+  "4": "search_flight",
+  "5": "search_hotel",
+  "6": "suggest_package",
+  "7": "talk_to_agent",
+  "8": "thank_you"
+}

@@ -1,0 +1,66 @@
+{
+  "type": "MaxHistoryTrackerFeaturizer",
+  "state_featurizer": {
+    "action_texts": [],
+    "entity_tag_specs": [],
+    "feature_states": {
+      "intent": {
+        "back": 0,
+        "general_travel_interest": 1,
+        "greet": 2,
+        "inform": 3,
+        "nlu_fallback": 4,
+        "out_of_scope": 5,
+        "restart": 6,
+        "restart_conversation": 7,
+        "search_flight": 8,
+        "search_hotel": 9,
+        "session_start": 10,
+        "suggest_package": 11,
+        "talk_to_agent": 12,
+        "thank_you": 13
+      },
+      "action_name": {
+        "action_listen": 0,
+        "action_restart": 1,
+        "action_session_start": 2,
+        "action_default_fallback": 3,
+        "action_deactivate_loop": 4,
+        "action_revert_fallback_events": 5,
+        "action_default_ask_affirmation": 6,
+        "action_default_ask_rephrase": 7,
+        "action_two_stage_fallback": 8,
+        "action_unlikely_intent": 9,
+        "action_back": 10,
+        "...": 11,
+        "action_extract_slots": 12,
+        "action_search_flight": 13,
+        "validate_flight_form": 14,
+        "utter_ask_destination": 15,
+        "utter_ask_source": 16,
+        "utter_ask_travel_date": 17,
+        "utter_ask_travel_type": 18,
+        "utter_default": 19,
+        "utter_greet": 20,
+        "utter_talk_to_agent": 21,
+        "utter_thank_you": 22,
+        "flight_form": 23
+      },
+      "entities": {
+        "destination": 0,
+        "source": 1,
+        "travel_date": 2
+      },
+      "slots": {
+        "source_0": 0,
+        "destination_0": 1,
+        "travel_date_0": 2
+      },
+      "active_loop": {
+        "flight_form": 0
+      }
+    }
+  },
+  "remove_duplicates": true,
+  "max_history": 5
+}
