@@ -2,9 +2,10 @@ from typing import Any, Text, Dict, List, Optional
 from rasa_sdk import Tracker, FormValidationAction, Action
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
+from rasa_sdk.events import SlotSet
 import requests
 from datetime import datetime
-from dateutil import parser  # To parse natural language dates like "10th July"
+from dateutil import parser
 
 class ValidateFlightForm(FormValidationAction):
     def name(self) -> Text:
@@ -72,7 +73,6 @@ class ActionSearchFlight(Action):
             dispatcher.utter_message(text="Please provide all the flight details before searching.")
             return []
 
-        # Convert date format to dd-MM-yyyy
         try:
             parsed_date = parser.parse(travel_date_raw, fuzzy=True)
             travel_date = parsed_date.strftime("%d-%m-%Y")
@@ -101,6 +101,7 @@ class ActionSearchFlight(Action):
                         f"Departs at {flight['departureTime']}, Arrives at {flight['arrivalTime']}, "
                         f"Price ₹{flight['price']}\n"
                     )
+                message += "\nWould you like to search for more flights or try something else?"
             else:
                 message = "Sorry, no flights found for your search."
 
@@ -109,3 +110,18 @@ class ActionSearchFlight(Action):
 
         dispatcher.utter_message(text=message)
         return []
+
+
+class ActionResetFlightForm(Action):
+    def name(self) -> Text:
+        return "action_reset_flight_form"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: DomainDict) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(text="Sure, let's start your flight search again.")
+        return [
+            SlotSet("source", None),
+            SlotSet("destination", None),
+            SlotSet("travel_date", None)
+        ]

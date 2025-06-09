@@ -131,6 +131,18 @@ nlu:
     - begin again
     - reset
 
+- intent: search_more_flights
+  examples: |
+    - I want more options
+    - Show me more flights
+    - Search again
+    - I want to look for different flights
+    - Can I change my search?
+    - Let me search again
+    - Check other options
+    - Show different flights
+
+
 # --- SYNONYMS ---
 - synonym: Mumbai
   examples: |

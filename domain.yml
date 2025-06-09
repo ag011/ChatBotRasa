@@ -10,6 +10,7 @@ intents:
   - inform
   - thank_you
   - restart_conversation
+  - search_more_flights
 
 entities:
   - source
@@ -67,6 +68,7 @@ responses:
 actions:
   - action_search_flight
   - validate_flight_form
+  - action_reset_flight_form
 
 
 forms:

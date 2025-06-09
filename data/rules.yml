@@ -26,6 +26,13 @@ rules:
     - action: action_restart
     - action: utter_greet
 
+- rule: Reset flight search and start again
+  steps:
+    - intent: search_more_flights
+    - action: action_reset_flight_form
+    - action: flight_form
+    - active_loop: flight_form
+
 
 
 - rule: Say greet message on greeting
