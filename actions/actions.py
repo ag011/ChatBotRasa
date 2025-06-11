@@ -7,6 +7,7 @@ import requests
 from datetime import datetime
 from dateutil import parser
 
+
 class ValidateFlightForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_flight_form"
@@ -20,6 +21,15 @@ class ValidateFlightForm(FormValidationAction):
     ) -> Optional[List[Text]]:
         return ["source", "destination", "travel_date"]
 
+    def _extract_corrected_city(self, text: str, entities: List[Dict], entity_type: str) -> Optional[str]:
+        city_values = [e["value"] for e in entities if e["entity"] == entity_type]
+        text = text.lower()
+        if "not" in text and len(city_values) == 2:
+            return city_values[0]  # First one is likely the correction
+        elif city_values:
+            return city_values[-1]  # Fallback to last mentioned
+        return None
+
     def validate_source(
         self,
         value: Text,
@@ -27,8 +37,21 @@ class ValidateFlightForm(FormValidationAction):
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
+        latest_intent = tracker.latest_message.get("intent", {}).get("name")
+        entities = tracker.latest_message.get("entities", [])
+        text = tracker.latest_message.get("text", "")
+
+        if latest_intent == "change_source" or "not" in text.lower():
+            corrected = self._extract_corrected_city(text, entities, "source")
+            if corrected:
+                dispatcher.utter_message(text=f"Updated your departure city to {corrected}.")
+                return {"source": corrected}
+            dispatcher.utter_message(text="Please specify the new departure city.")
+            return {"source": None}
+
         if value and len(value) > 1:
             return {"source": value}
+
         dispatcher.utter_message(text="Please enter a valid departure city.")
         return {"source": None}
 
@@ -39,8 +62,21 @@ class ValidateFlightForm(FormValidationAction):
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
+        latest_intent = tracker.latest_message.get("intent", {}).get("name")
+        entities = tracker.latest_message.get("entities", [])
+        text = tracker.latest_message.get("text", "")
+
+        if latest_intent == "change_destination" or "not" in text.lower():
+            corrected = self._extract_corrected_city(text, entities, "destination")
+            if corrected:
+                dispatcher.utter_message(text=f"Updated your destination to {corrected}.")
+                return {"destination": corrected}
+            dispatcher.utter_message(text="Please specify the new destination city.")
+            return {"destination": None}
+
         if value and len(value) > 1:
             return {"destination": value}
+
         dispatcher.utter_message(text="Please enter a valid destination city.")
         return {"destination": None}
 
@@ -76,7 +112,7 @@ class ActionSearchFlight(Action):
         try:
             parsed_date = parser.parse(travel_date_raw, fuzzy=True)
             travel_date = parsed_date.strftime("%d-%m-%Y")
-        except Exception as e:
+        except Exception:
             dispatcher.utter_message(text="Sorry, I couldn't understand the travel date. Please rephrase it.")
             return []
 

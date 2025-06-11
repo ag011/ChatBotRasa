@@ -31,3 +31,41 @@ stories:
     - active_loop: flight_form
     - active_loop: null
     - action: action_search_flight
+
+- story: User changes departure city during form
+  steps:
+    - intent: search_flight
+    - action: flight_form
+    - active_loop: flight_form
+    - slot_was_set:
+        - source: "Delhi"
+    - intent: change_source
+    - action: utter_ask_source
+    - slot_was_set:
+        - source: "Mumbai"
+    - slot_was_set:
+        - destination: "Dubai"
+    - slot_was_set:
+        - travel_date: "2025-07-10"
+    - active_loop: null
+    - action: action_search_flight
+
+- story: Restart search mid-way
+  steps:
+    - intent: search_flight
+    - action: flight_form
+    - active_loop: flight_form
+    - slot_was_set:
+        - source: "Delhi"
+    - intent: search_more_flights
+    - action: action_reset_flight_form
+    - action: flight_form
+    - active_loop: flight_form
+    - slot_was_set:
+        - source: "Mumbai"
+    - slot_was_set:
+        - destination: "Goa"
+    - slot_was_set:
+        - travel_date: "2025-08-15"
+    - active_loop: null
+    - action: action_search_flight

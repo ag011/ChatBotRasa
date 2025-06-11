@@ -142,6 +142,20 @@ nlu:
     - Check other options
     - Show different flights
 
+- intent: change_source
+  examples: |
+    - Sorry, I gave the wrong departure city
+    - Actually, the source is different
+    - I want to change my departure city
+    - Actually it's [Mumbai](source), not [Delhi](source)
+    - Please change the source to [Chennai](source)
+    - I said the wrong source
+    - Let me update the starting location
+    - Sorry, Given the wrong departure city
+    - I want to change my departure city
+    - Please change the departure city
+    - Change the departure city
+
 
 # --- SYNONYMS ---
 - synonym: Mumbai

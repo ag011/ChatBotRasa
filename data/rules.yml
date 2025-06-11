@@ -33,6 +33,23 @@ rules:
     - action: flight_form
     - active_loop: flight_form
 
+- rule: Restart flight form from scratch
+  steps:
+    - intent: search_more_flights
+    - action: action_reset_flight_form
+    - action: flight_form
+    - active_loop: flight_form
+
+
+- rule: Change source city during flight form
+  condition:
+    - active_loop: flight_form
+  steps:
+    - intent: change_source
+    - action: utter_ask_source
+    - slot_was_set:
+        - source: null
+
 
 
 - rule: Say greet message on greeting
