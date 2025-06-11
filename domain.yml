@@ -12,6 +12,7 @@ intents:
   - restart_conversation
   - search_more_flights
   - change_source
+  - change_destination
 
 entities:
   - source

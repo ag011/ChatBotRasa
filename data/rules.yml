@@ -50,6 +50,39 @@ rules:
     - slot_was_set:
         - source: null
 
+- rule: Change destination city during flight form
+  condition:
+    - active_loop: flight_form
+  steps:
+    - intent: change_destination
+    - action: utter_ask_destination
+    - slot_was_set:
+        - destination: null
+
+- rule: Handle destination correction
+  steps:
+    - intent: change_destination
+    - action: flight_form
+    - active_loop: flight_form
+
+- rule: Handle source correction
+  steps:
+    - intent: change_source
+    - action: flight_form
+    - active_loop: flight_form
+
+
+- rule: Handle source correction
+  steps:
+    - intent: change_source
+    - action: flight_form
+    - active_loop: flight_form
+
+- rule: Handle destination correction
+  steps:
+    - intent: change_destination
+    - action: flight_form
+    - active_loop: flight_form
 
 
 - rule: Say greet message on greeting

@@ -69,3 +69,22 @@ stories:
         - travel_date: "2025-08-15"
     - active_loop: null
     - action: action_search_flight
+
+- story: User changes destination city during form
+  steps:
+    - intent: search_flight
+    - action: flight_form
+    - active_loop: flight_form
+    - slot_was_set:
+        - source: "Delhi"
+    - slot_was_set:
+        - destination: "Dubai"
+    - intent: change_destination
+    - action: utter_ask_destination
+    - slot_was_set:
+        - destination: "Goa"
+    - slot_was_set:
+        - travel_date: "2025-07-10"
+    - active_loop: null
+    - action: action_search_flight
+

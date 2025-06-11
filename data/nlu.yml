@@ -156,6 +156,18 @@ nlu:
     - Please change the departure city
     - Change the departure city
 
+- intent: change_destination
+  examples: |
+    - Sorry, I gave the wrong destination city
+    - Actually, the destination is different
+    - I want to change my destination city
+    - Actually it's [Goa](destination), not [Dubai](destination)
+    - Please change the destination to [Paris](destination)
+    - I said the wrong destination
+    - Let me update the destination city
+    - Sorry, given the wrong destination
+    - Change the destination city
+
 
 # --- SYNONYMS ---
 - synonym: Mumbai

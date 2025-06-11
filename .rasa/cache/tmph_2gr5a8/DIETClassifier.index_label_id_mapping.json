@@ -1,0 +1,14 @@
+{
+  "0": "change_destination",
+  "1": "change_source",
+  "2": "general_travel_interest",
+  "3": "greet",
+  "4": "inform",
+  "5": "restart_conversation",
+  "6": "search_flight",
+  "7": "search_hotel",
+  "8": "search_more_flights",
+  "9": "suggest_package",
+  "10": "talk_to_agent",
+  "11": "thank_you"
+}
