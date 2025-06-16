@@ -19,15 +19,15 @@ class ValidateFlightForm(FormValidationAction):
         tracker: Tracker,
         domain: DomainDict,
     ) -> Optional[List[Text]]:
-        return ["source", "destination", "travel_date"]
+        return ["source", "destination", "travel_date", "confirm_flight_details"]
 
     def _extract_corrected_city(self, text: str, entities: List[Dict], entity_type: str) -> Optional[str]:
         city_values = [e["value"] for e in entities if e["entity"] == entity_type]
         text = text.lower()
         if "not" in text and len(city_values) == 2:
-            return city_values[0]  # First one is likely the correction
+            return city_values[0]
         elif city_values:
-            return city_values[-1]  # Fallback to last mentioned
+            return city_values[-1]
         return None
 
     def validate_source(
@@ -91,6 +91,28 @@ class ValidateFlightForm(FormValidationAction):
             return {"travel_date": value}
         dispatcher.utter_message(text="Please enter a valid travel date.")
         return {"travel_date": None}
+
+    def validate_confirm_flight_details(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict
+    ) -> Dict[Text, Any]:
+        intent = tracker.latest_message.get("intent", {}).get("name")
+        if intent == "affirm":
+            return {"confirm_flight_details": "yes"}
+        elif intent == "deny":
+            dispatcher.utter_message(text="Okay, let's update your travel details.")
+            return {
+                "source": None,
+                "destination": None,
+                "travel_date": None,
+                "confirm_flight_details": None
+            }
+        else:
+            dispatcher.utter_message(text="Please confirm with 'yes' or 'no'.")
+            return {"confirm_flight_details": None}
 
 
 class ActionSearchFlight(Action):
@@ -159,5 +181,6 @@ class ActionResetFlightForm(Action):
         return [
             SlotSet("source", None),
             SlotSet("destination", None),
-            SlotSet("travel_date", None)
+            SlotSet("travel_date", None),
+            SlotSet("confirm_flight_details", None)
         ]

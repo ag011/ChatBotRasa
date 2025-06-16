@@ -1,7 +1,8 @@
 version: "3.1"
 
 stories:
-- story: Book flight step-by-step
+
+- story: Book flight with confirmation
   steps:
     - intent: search_flight
     - action: flight_form
@@ -12,6 +13,34 @@ stories:
         - destination: "Dubai"
     - slot_was_set:
         - travel_date: "2025-07-10"
+    - slot_was_set:
+        - confirm_flight_details: "yes"
+    - active_loop: null
+    - action: action_search_flight
+
+- story: User denies flight confirmation
+  steps:
+    - intent: search_flight
+    - action: flight_form
+    - active_loop: flight_form
+    - slot_was_set:
+        - source: "Delhi"
+    - slot_was_set:
+        - destination: "Dubai"
+    - slot_was_set:
+        - travel_date: "2025-07-10"
+    - slot_was_set:
+        - confirm_flight_details: "no"
+    - action: flight_form
+    - active_loop: flight_form
+    - slot_was_set:
+        - source: "Mumbai"
+    - slot_was_set:
+        - destination: "Singapore"
+    - slot_was_set:
+        - travel_date: "2025-07-20"
+    - slot_was_set:
+        - confirm_flight_details: "yes"
     - active_loop: null
     - action: action_search_flight
 
@@ -29,6 +58,8 @@ stories:
         - travel_date: "2025-07-10"
     - action: flight_form
     - active_loop: flight_form
+    - slot_was_set:
+        - confirm_flight_details: "yes"
     - active_loop: null
     - action: action_search_flight
 
@@ -47,6 +78,8 @@ stories:
         - destination: "Dubai"
     - slot_was_set:
         - travel_date: "2025-07-10"
+    - slot_was_set:
+        - confirm_flight_details: "yes"
     - active_loop: null
     - action: action_search_flight
 
@@ -67,6 +100,8 @@ stories:
         - destination: "Goa"
     - slot_was_set:
         - travel_date: "2025-08-15"
+    - slot_was_set:
+        - confirm_flight_details: "yes"
     - active_loop: null
     - action: action_search_flight
 
@@ -85,6 +120,7 @@ stories:
         - destination: "Goa"
     - slot_was_set:
         - travel_date: "2025-07-10"
+    - slot_was_set:
+        - confirm_flight_details: "yes"
     - active_loop: null
     - action: action_search_flight
-

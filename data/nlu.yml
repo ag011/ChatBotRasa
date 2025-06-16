@@ -70,6 +70,24 @@ nlu:
     - Need help from customer support
     - Connect me to someone
 
+- intent: affirm
+  examples: |
+    - yes
+    - yeah
+    - that's correct
+    - correct
+    - absolutely
+    - right
+
+- intent: deny
+  examples: |
+    - no
+    - nope
+    - not really
+    - I want to change
+    - that's not correct
+
+
 # --- LOOKUP TABLES TO AID ENTITY EXTRACTION ---
 - lookup: source
   examples: |

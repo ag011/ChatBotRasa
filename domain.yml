@@ -13,6 +13,8 @@ intents:
   - search_more_flights
   - change_source
   - change_destination
+  - affirm
+  - deny
 
 entities:
   - source
@@ -39,9 +41,19 @@ slots:
     influence_conversation: true
     mappings:
       - type: from_entity
-        entity: travel_date 
+        entity: travel_date
+
+  confirm_flight_details:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
 
 responses:
+
+  utter_ask_confirm_flight_details:
+  - text: "Are you sure you are travelling from {source} to {destination} on {travel_date}?"
+
   utter_ask_source:
     - text: "Please provide the departure city."
 
@@ -79,5 +91,7 @@ forms:
       - source
       - destination
       - travel_date
+      - confirm_flight_details
+
 
 
