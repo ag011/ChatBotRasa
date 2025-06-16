@@ -19,6 +19,15 @@ class ValidateFlightForm(FormValidationAction):
         tracker: Tracker,
         domain: DomainDict,
     ) -> Optional[List[Text]]:
+        # Ask for confirm_flight_details only after others are filled
+        if not tracker.slots.get("source"):
+            return ["source"]
+        if not tracker.slots.get("destination"):
+            return ["destination"]
+        if not tracker.slots.get("travel_date"):
+            return ["travel_date"]
+        if not tracker.slots.get("confirm_flight_details"):
+            return ["confirm_flight_details"]
         return ["source", "destination", "travel_date", "confirm_flight_details"]
 
     def _extract_corrected_city(self, text: str, entities: List[Dict], entity_type: str) -> Optional[str]:

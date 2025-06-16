@@ -52,7 +52,11 @@ slots:
 responses:
 
   utter_ask_confirm_flight_details:
-  - text: "Are you sure you are travelling from {source} to {destination} on {travel_date}?"
+    - text: "Are you sure you are travelling from {source} to {destination} on {travel_date}?"
+
+  utter_invalid_confirmation:
+    - text: "Please respond with 'yes' or 'no'."
+
 
   utter_ask_source:
     - text: "Please provide the departure city."
@@ -92,6 +96,8 @@ forms:
       - destination
       - travel_date
       - confirm_flight_details
+
+
 
 
 
