@@ -87,6 +87,7 @@ actions:
   - action_search_flight
   - validate_flight_form
   - action_reset_flight_form
+  - action_talk_to_agent
 
 
 forms:
@@ -96,8 +97,4 @@ forms:
       - destination
       - travel_date
       - confirm_flight_details
-
-
-
-
-
+      

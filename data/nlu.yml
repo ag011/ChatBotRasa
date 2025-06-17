@@ -65,27 +65,11 @@ nlu:
 # --- TALK TO HUMAN AGENT ---
 - intent: talk_to_agent
   examples: |
-    - I want to talk to a human
-    - Can I speak with an agent?
-    - Need help from customer support
-    - Connect me to someone
-
-- intent: affirm
-  examples: |
-    - yes
-    - yeah
-    - that's correct
-    - correct
-    - absolutely
-    - right
-
-- intent: deny
-  examples: |
-    - no
-    - nope
-    - not really
-    - I want to change
-    - that's not correct
+    - I want to talk to a person
+    - Connect me to an agent
+    - Can I speak with someone?
+    - I want human help
+    - Need a live person
 
 
 # --- LOOKUP TABLES TO AID ENTITY EXTRACTION ---
@@ -194,3 +178,4 @@ nlu:
 
 - synonym: Bangalore
   examples:
+  

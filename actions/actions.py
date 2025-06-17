@@ -109,9 +109,10 @@ class ValidateFlightForm(FormValidationAction):
         domain: DomainDict
     ) -> Dict[Text, Any]:
         intent = tracker.latest_message.get("intent", {}).get("name")
-        if intent == "affirm":
+        value_cleaned = value.strip().lower()
+        if intent == "affirm" or value_cleaned in ["yes", "yeah", "yup", "sure"]:
             return {"confirm_flight_details": "yes"}
-        elif intent == "deny":
+        elif intent == "deny" or value_cleaned in ["no", "nope", "nah"]:
             dispatcher.utter_message(text="Okay, let's update your travel details.")
             return {
                 "source": None,
@@ -193,3 +194,36 @@ class ActionResetFlightForm(Action):
             SlotSet("travel_date", None),
             SlotSet("confirm_flight_details", None)
         ]
+    
+# In actions.py
+class ActionTalkToAgent(Action):
+    def name(self) -> Text:
+        return "action_talk_to_agent"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        user_message = tracker.latest_message.get("text")
+
+        payload = {
+            "userMessage": user_message,
+            "intent": tracker.latest_message.get("intent", {}).get("name")
+        }
+
+        try:
+            response = requests.post(
+                "http://localhost:8080/chatbot/escalate_to_agent",  # Replace with your host/port if needed
+                json=payload
+            )
+
+            if response.status_code == 200:
+                message = response.json().get("responseText", "You are being connected to an agent.")
+            else:
+                message = "There was an issue connecting to the agent. Please try again later."
+
+        except Exception as e:
+            message = f"Something went wrong: {str(e)}"
+
+        dispatcher.utter_message(text=message)
+        return []

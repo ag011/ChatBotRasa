@@ -63,6 +63,15 @@ stories:
     - active_loop: null
     - action: action_search_flight
 
+- story: User asks to talk to agent
+  steps:
+    - intent: talk_to_agent
+    - action: action_deactivate_loop
+    - active_loop: null
+    - action: action_talk_to_agent
+
+
+
 - story: User changes departure city during form
   steps:
     - intent: search_flight
