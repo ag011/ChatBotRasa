@@ -1,0 +1,16 @@
+{
+  "0": "change_destination",
+  "1": "change_source",
+  "2": "check_agent_reply",
+  "3": "end_chat",
+  "4": "general_travel_interest",
+  "5": "greet",
+  "6": "inform",
+  "7": "restart_conversation",
+  "8": "search_flight",
+  "9": "search_hotel",
+  "10": "search_more_flights",
+  "11": "suggest_package",
+  "12": "talk_to_agent",
+  "13": "thank_you"
+}

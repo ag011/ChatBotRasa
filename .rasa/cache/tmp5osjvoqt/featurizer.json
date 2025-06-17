@@ -1,0 +1,77 @@
+{
+  "type": "MaxHistoryTrackerFeaturizer",
+  "state_featurizer": {
+    "action_texts": [],
+    "entity_tag_specs": [],
+    "feature_states": {
+      "intent": {
+        "affirm": 0,
+        "back": 1,
+        "change_destination": 2,
+        "change_source": 3,
+        "check_agent_reply": 4,
+        "deny": 5,
+        "general_travel_interest": 6,
+        "greet": 7,
+        "inform": 8,
+        "nlu_fallback": 9,
+        "out_of_scope": 10,
+        "restart": 11,
+        "restart_conversation": 12,
+        "search_flight": 13,
+        "search_hotel": 14,
+        "search_more_flights": 15,
+        "session_start": 16,
+        "suggest_package": 17,
+        "talk_to_agent": 18,
+        "thank_you": 19
+      },
+      "action_name": {
+        "action_listen": 0,
+        "action_restart": 1,
+        "action_session_start": 2,
+        "action_default_fallback": 3,
+        "action_deactivate_loop": 4,
+        "action_revert_fallback_events": 5,
+        "action_default_ask_affirmation": 6,
+        "action_default_ask_rephrase": 7,
+        "action_two_stage_fallback": 8,
+        "action_unlikely_intent": 9,
+        "action_back": 10,
+        "...": 11,
+        "action_extract_slots": 12,
+        "action_search_flight": 13,
+        "validate_flight_form": 14,
+        "action_reset_flight_form": 15,
+        "action_talk_to_agent": 16,
+        "check_agent_reply": 17,
+        "utter_ask_confirm_flight_details": 18,
+        "utter_ask_destination": 19,
+        "utter_ask_source": 20,
+        "utter_ask_travel_date": 21,
+        "utter_ask_travel_type": 22,
+        "utter_default": 23,
+        "utter_greet": 24,
+        "utter_invalid_confirmation": 25,
+        "utter_talk_to_agent": 26,
+        "utter_thank_you": 27,
+        "flight_form": 28
+      },
+      "entities": {
+        "destination": 0,
+        "source": 1,
+        "travel_date": 2
+      },
+      "slots": {
+        "source_0": 0,
+        "destination_0": 1,
+        "travel_date_0": 2
+      },
+      "active_loop": {
+        "flight_form": 0
+      }
+    }
+  },
+  "remove_duplicates": true,
+  "max_history": 5
+}

@@ -1,0 +1,83 @@
+{
+  "type": "MaxHistoryTrackerFeaturizer",
+  "state_featurizer": {
+    "action_texts": [],
+    "entity_tag_specs": [],
+    "feature_states": {
+      "intent": {
+        "affirm": 0,
+        "back": 1,
+        "change_destination": 2,
+        "change_source": 3,
+        "check_agent_reply": 4,
+        "deny": 5,
+        "end_chat": 6,
+        "general_travel_interest": 7,
+        "greet": 8,
+        "inform": 9,
+        "nlu_fallback": 10,
+        "out_of_scope": 11,
+        "restart": 12,
+        "restart_conversation": 13,
+        "search_flight": 14,
+        "search_hotel": 15,
+        "search_more_flights": 16,
+        "session_start": 17,
+        "suggest_package": 18,
+        "talk_to_agent": 19,
+        "thank_you": 20
+      },
+      "action_name": {
+        "action_listen": 0,
+        "action_restart": 1,
+        "action_session_start": 2,
+        "action_default_fallback": 3,
+        "action_deactivate_loop": 4,
+        "action_revert_fallback_events": 5,
+        "action_default_ask_affirmation": 6,
+        "action_default_ask_rephrase": 7,
+        "action_two_stage_fallback": 8,
+        "action_unlikely_intent": 9,
+        "action_back": 10,
+        "...": 11,
+        "action_extract_slots": 12,
+        "action_search_flight": 13,
+        "validate_flight_form": 14,
+        "action_reset_flight_form": 15,
+        "action_talk_to_agent": 16,
+        "action_check_agent_reply": 17,
+        "action_send_to_agent": 18,
+        "action_handle_live_chat": 19,
+        "action_end_live_chat": 20,
+        "utter_ask_confirm_flight_details": 21,
+        "utter_ask_destination": 22,
+        "utter_ask_source": 23,
+        "utter_ask_travel_date": 24,
+        "utter_ask_travel_type": 25,
+        "utter_default": 26,
+        "utter_greet": 27,
+        "utter_invalid_confirmation": 28,
+        "utter_talk_to_agent": 29,
+        "utter_thank_you": 30,
+        "flight_form": 31
+      },
+      "entities": {
+        "destination": 0,
+        "source": 1,
+        "travel_date": 2
+      },
+      "slots": {
+        "source_0": 0,
+        "destination_0": 1,
+        "travel_date_0": 2,
+        "talking_to_agent_0": 3,
+        "talking_to_agent_1": 4
+      },
+      "active_loop": {
+        "flight_form": 0
+      }
+    }
+  },
+  "remove_duplicates": true,
+  "max_history": 5
+}

@@ -35,6 +35,17 @@ nlu:
     - My travel date is [20th September](travel_date)
     - Source is [Kolkata](source)
     - Destination is [Goa](destination)
+    # New: Messages during live chat
+    - I want to know about flights
+    - Please help me with my booking
+    - Can you tell me more about hotels?
+    - What packages are available?
+    - I need help with my travel plans
+    - Are there any flights tomorrow?
+    - Can you suggest good packages?
+    - I want to cancel my flight
+    - Tell me about international flights
+
 
 # --- GENERAL INTEREST IN TRAVEL ---
 - intent: general_travel_interest
@@ -71,36 +82,6 @@ nlu:
     - I want human help
     - Need a live person
 
-
-# --- LOOKUP TABLES TO AID ENTITY EXTRACTION ---
-- lookup: source
-  examples: |
-    - Delhi
-    - Mumbai
-    - Chennai
-    - Kolkata
-    - Hyderabad
-    - Pune
-    - Bangalore
-
-- lookup: destination
-  examples: |
-    - Dubai
-    - Singapore
-    - Paris
-    - London
-    - New York
-    - Goa
-
-- lookup: travel_date
-  examples: |
-    - 10th July
-    - 15th August
-    - June 5th
-    - 1st September
-    - 5th June
-    - 20th September
-
 # --- GREET ---
 - intent: greet
   examples: |
@@ -122,6 +103,14 @@ nlu:
     - thanks a lot
     - thx
 
+# End the chat
+- intent: end_chat
+  examples: |
+    - I'm done
+    - End the chat
+    - Back to bot
+    - Close this conversation
+
 - intent: restart_conversation
   examples: |
     - I want to start again
@@ -132,6 +121,15 @@ nlu:
     - start again
     - begin again
     - reset
+
+- intent: check_agent_reply
+  examples: |
+    - Any update from the agent?
+    - Did the agent respond?
+    - What's the agent's reply?
+    - Check agent response
+    - Is there a reply from support?
+
 
 - intent: search_more_flights
   examples: |
@@ -154,7 +152,6 @@ nlu:
     - I said the wrong source
     - Let me update the starting location
     - Sorry, Given the wrong departure city
-    - I want to change my departure city
     - Please change the departure city
     - Change the departure city
 
@@ -170,6 +167,35 @@ nlu:
     - Sorry, given the wrong destination
     - Change the destination city
 
+# --- LOOKUP TABLES TO AID ENTITY EXTRACTION ---
+- lookup: source
+  examples: |
+    - Delhi
+    - Mumbai
+    - Chennai
+    - Kolkata
+    - Hyderabad
+    - Pune
+    - Bangalore
+
+- lookup: destination
+  examples: |
+    - Dubai
+    - Singapore
+    - Paris
+    - London
+    - New York
+    - Goa
+    - Bangalore
+
+- lookup: travel_date
+  examples: |
+    - 10th July
+    - 15th August
+    - June 5th
+    - 1st September
+    - 5th June
+    - 20th September
 
 # --- SYNONYMS ---
 - synonym: Mumbai
@@ -177,5 +203,23 @@ nlu:
     - Bombay
 
 - synonym: Bangalore
-  examples:
-  
+  examples: |
+    - Bengaluru
+    - Bangaluru
+
+- synonym: New York
+  examples: |
+    - NYC
+    - New York City
+
+- synonym: Delhi
+  examples: |
+    - New Delhi
+
+- synonym: Goa
+  examples: |
+    - Goan
+
+- synonym: Chennai
+  examples: |
+    - Madras

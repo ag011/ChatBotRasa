@@ -1,0 +1,6 @@
+{
+  "rule_only_slots": [
+    "talking_to_agent"
+  ],
+  "rule_only_loops": []
+}

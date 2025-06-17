@@ -87,12 +87,34 @@ rules:
     - action: action_search_flight
 
 
-- rule: Escalate to human agent
+# rules.yml
+
+- rule: Escalate to human agent from flight form
+  condition:
+    - active_loop: flight_form
   steps:
     - intent: talk_to_agent
     - action: action_deactivate_loop
-    - active_loop: null
     - action: action_talk_to_agent
+
+
+- rule: Check for agent reply
+  steps:
+    - intent: check_agent_reply
+    - action: action_check_agent_reply
+
+- rule: Route user message to agent
+  condition:
+    - slot_was_set:
+        - talking_to_agent: true
+  steps:
+    - intent: inform
+    - action: action_handle_live_chat
+
+- rule: End chat with agent
+  steps:
+    - intent: end_chat
+    - action: action_end_live_chat
 
 
 - rule: Say greet message on greeting

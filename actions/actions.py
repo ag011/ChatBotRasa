@@ -19,7 +19,6 @@ class ValidateFlightForm(FormValidationAction):
         tracker: Tracker,
         domain: DomainDict,
     ) -> Optional[List[Text]]:
-        # Ask for confirm_flight_details only after others are filled
         if not tracker.slots.get("source"):
             return ["source"]
         if not tracker.slots.get("destination"):
@@ -39,17 +38,10 @@ class ValidateFlightForm(FormValidationAction):
             return city_values[-1]
         return None
 
-    def validate_source(
-        self,
-        value: Text,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
-    ) -> Dict[Text, Any]:
+    def validate_source(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> Dict[Text, Any]:
         latest_intent = tracker.latest_message.get("intent", {}).get("name")
         entities = tracker.latest_message.get("entities", [])
         text = tracker.latest_message.get("text", "")
-
         if latest_intent == "change_source" or "not" in text.lower():
             corrected = self._extract_corrected_city(text, entities, "source")
             if corrected:
@@ -57,24 +49,15 @@ class ValidateFlightForm(FormValidationAction):
                 return {"source": corrected}
             dispatcher.utter_message(text="Please specify the new departure city.")
             return {"source": None}
-
         if value and len(value) > 1:
             return {"source": value}
-
         dispatcher.utter_message(text="Please enter a valid departure city.")
         return {"source": None}
 
-    def validate_destination(
-        self,
-        value: Text,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
-    ) -> Dict[Text, Any]:
+    def validate_destination(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> Dict[Text, Any]:
         latest_intent = tracker.latest_message.get("intent", {}).get("name")
         entities = tracker.latest_message.get("entities", [])
         text = tracker.latest_message.get("text", "")
-
         if latest_intent == "change_destination" or "not" in text.lower():
             corrected = self._extract_corrected_city(text, entities, "destination")
             if corrected:
@@ -82,32 +65,18 @@ class ValidateFlightForm(FormValidationAction):
                 return {"destination": corrected}
             dispatcher.utter_message(text="Please specify the new destination city.")
             return {"destination": None}
-
         if value and len(value) > 1:
             return {"destination": value}
-
         dispatcher.utter_message(text="Please enter a valid destination city.")
         return {"destination": None}
 
-    def validate_travel_date(
-        self,
-        value: Text,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
-    ) -> Dict[Text, Any]:
+    def validate_travel_date(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> Dict[Text, Any]:
         if value and len(value) > 3:
             return {"travel_date": value}
         dispatcher.utter_message(text="Please enter a valid travel date.")
         return {"travel_date": None}
 
-    def validate_confirm_flight_details(
-        self,
-        value: Text,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict
-    ) -> Dict[Text, Any]:
+    def validate_confirm_flight_details(self, value: Text, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> Dict[Text, Any]:
         intent = tracker.latest_message.get("intent", {}).get("name")
         value_cleaned = value.strip().lower()
         if intent == "affirm" or value_cleaned in ["yes", "yeah", "yup", "sure"]:
@@ -129,10 +98,7 @@ class ActionSearchFlight(Action):
     def name(self) -> Text:
         return "action_search_flight"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: DomainDict) -> List[Dict[Text, Any]]:
-
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
         source = tracker.get_slot("source")
         destination = tracker.get_slot("destination")
         travel_date_raw = tracker.get_slot("travel_date")
@@ -184,9 +150,7 @@ class ActionResetFlightForm(Action):
     def name(self) -> Text:
         return "action_reset_flight_form"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: DomainDict) -> List[Dict[Text, Any]]:
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict) -> List[Dict[Text, Any]]:
         dispatcher.utter_message(text="Sure, let's start your flight search again.")
         return [
             SlotSet("source", None),
@@ -194,16 +158,13 @@ class ActionResetFlightForm(Action):
             SlotSet("travel_date", None),
             SlotSet("confirm_flight_details", None)
         ]
-    
-# In actions.py
+
+
 class ActionTalkToAgent(Action):
     def name(self) -> Text:
         return "action_talk_to_agent"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         user_message = tracker.latest_message.get("text")
 
         payload = {
@@ -212,18 +173,53 @@ class ActionTalkToAgent(Action):
         }
 
         try:
-            response = requests.post(
-                "http://localhost:8080/chatbot/escalate_to_agent",  # Replace with your host/port if needed
-                json=payload
-            )
-
+            response = requests.post("http://localhost:8080/chatbot/escalate_to_agent", json=payload)
             if response.status_code == 200:
                 message = response.json().get("responseText", "You are being connected to an agent.")
             else:
                 message = "There was an issue connecting to the agent. Please try again later."
-
         except Exception as e:
             message = f"Something went wrong: {str(e)}"
 
         dispatcher.utter_message(text=message)
+        return []
+
+
+class ActionSendMessageToAgent(Action):
+    def name(self) -> Text:
+        return "action_send_to_agent"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        user_message = tracker.latest_message.get("text")
+
+        try:
+            response = requests.post("http://localhost:8080/chatbot/agent_chat", json={"userMessage": user_message})
+            if response.status_code == 200:
+                dispatcher.utter_message(text="Your message has been sent to the agent.")
+            else:
+                dispatcher.utter_message(text="Failed to send your message. Please try again.")
+        except Exception as e:
+            dispatcher.utter_message(text=f"Error sending message to agent: {str(e)}")
+
+        return []
+
+
+class ActionCheckAgentReply(Action):
+    def name(self) -> Text:
+        return "action_check_agent_reply"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        try:
+            response = requests.get("http://localhost:8080/chatbot/agent_reply/latest")
+            if response.status_code == 200:
+                reply = response.json().get("reply", "")
+                if reply:
+                    dispatcher.utter_message(text=f"Agent says: {reply}")
+                else:
+                    dispatcher.utter_message(text="Still waiting for a reply from the agent...")
+            else:
+                dispatcher.utter_message(text="Could not reach the agent system. Try again shortly.")
+        except Exception as e:
+            dispatcher.utter_message(text=f"Something went wrong while checking agent reply: {str(e)}")
+
         return []

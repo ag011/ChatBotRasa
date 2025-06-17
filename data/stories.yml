@@ -71,6 +71,11 @@ stories:
     - action: action_talk_to_agent
 
 
+- story: Escalate to human agent normally
+  steps:
+    - intent: talk_to_agent
+    - action: action_talk_to_agent
+
 
 - story: User changes departure city during form
   steps:

@@ -6,6 +6,7 @@ intents:
   - search_hotel
   - suggest_package
   - talk_to_agent
+  - check_agent_reply
   - general_travel_interest
   - inform
   - thank_you
@@ -15,6 +16,7 @@ intents:
   - change_destination
   - affirm
   - deny
+  - end_chat
 
 entities:
   - source
@@ -48,6 +50,13 @@ slots:
     influence_conversation: false
     mappings:
       - type: from_text
+
+  talking_to_agent:
+    type: bool
+    influence_conversation: true
+    mappings:
+      - type: custom
+
 
 responses:
 
@@ -88,6 +97,10 @@ actions:
   - validate_flight_form
   - action_reset_flight_form
   - action_talk_to_agent
+  - action_check_agent_reply
+  - action_send_to_agent
+  - action_handle_live_chat     # ADD THIS
+  - action_end_live_chat        # ADD THIS
 
 
 forms:
@@ -97,4 +110,3 @@ forms:
       - destination
       - travel_date
       - confirm_flight_details
-      
